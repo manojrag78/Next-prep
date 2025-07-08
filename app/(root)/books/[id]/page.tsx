@@ -5,27 +5,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
-interface BookDetailPageProps {
-  params: {
-    id: string;
-  };
-}
-
-// Optional: Dynamic metadata for SEO
-export async function generateMetadata({ params }: BookDetailPageProps): Promise<Metadata> {
-  const book = await getBookById(params.id);
-
-  return {
-    title: book?.volumeInfo?.title || 'Book Detail',
-    description: book?.volumeInfo?.description?.slice(0, 150),
-  };
-}
-
-export default async function BookDetail({ params }: BookDetailPageProps) {
-  const book = await getBookById(params.id);
+export default async function BookDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = await params;
+  const book = await getBookById(resolvedParams.id);
 
   if (!book) {
-    notFound(); // Proper 404
+    notFound(); 
   }
 
   return (
@@ -69,7 +58,6 @@ export default async function BookDetail({ params }: BookDetailPageProps) {
                 </p>
               )}
 
-              {/* Rating */}
               {book.volumeInfo?.averageRating && (
                 <div className="flex items-center mb-4">
                   <div className="flex">
@@ -90,7 +78,6 @@ export default async function BookDetail({ params }: BookDetailPageProps) {
                 </div>
               )}
 
-              {/* Preview Button */}
               {book.volumeInfo?.previewLink && (
                 <a
                   href={book.volumeInfo.previewLink}
@@ -103,7 +90,6 @@ export default async function BookDetail({ params }: BookDetailPageProps) {
                 </a>
               )}
 
-              {/* Metadata */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {book.volumeInfo?.publishedDate && (
                   <div>
@@ -134,7 +120,6 @@ export default async function BookDetail({ params }: BookDetailPageProps) {
                 )}
               </div>
 
-              {/* Description */}
               {book.volumeInfo?.description && (
                 <div className="prose max-w-none">
                   <h3 className="text-lg font-semibold text-indigo-900 mb-2">Description</h3>
@@ -147,4 +132,18 @@ export default async function BookDetail({ params }: BookDetailPageProps) {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const book = await getBookById(resolvedParams.id);
+
+  return {
+    title: book?.volumeInfo?.title || 'Book Details',
+    description: book?.volumeInfo?.description?.slice(0, 160),
+  };
 }
