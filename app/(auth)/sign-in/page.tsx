@@ -3,18 +3,37 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { gridFormConfig, GridFormValues } from "../config/sign-in-config";
 import DynamicForm from "@/app/lib/Form/_components/DynamicForm";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { setSessionToken } from "../config/sessionToken";
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const handleSubmit = (data: GridFormValues) => {
-    console.log("Form submitted ✅", data);
+  const router = useRouter();
+
+  const handleSubmit = async (data: GridFormValues) => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      // Simulate a successful login
-      alert("Login successful!");
-      // Redirect to the dashboard or home page
-    }, 2000);
+    const req = {
+      email: data?.email || "",
+      password: data?.password || "",
+    };
+    try {
+      const url = process.env.NEXT_PUBLIC_BACK_END_URL;
+
+      const response = await axios.post(`${url}/api/auth/login`, req);
+      const { token, user } = response.data;
+
+      if (token && user) {
+        setSessionToken(token)
+        localStorage.setItem("user", JSON.stringify(user));
+        router.push("/chat");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+    finally{
+      setIsLoading(false)
+    }
   };
 
   return (

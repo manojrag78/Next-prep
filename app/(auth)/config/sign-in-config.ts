@@ -1,8 +1,8 @@
 import { FormConfig } from "@/app/lib/Form/Formtypes/Formtypes";
 
 export type GridFormValues = {
-  userName: string;
   password: string;
+  email : string
 };
 
 export const gridFormConfig: FormConfig<GridFormValues> = {
@@ -17,11 +17,11 @@ export const gridFormConfig: FormConfig<GridFormValues> = {
   gridCols: 12, 
   fields: [
     {
-      name: "userName",
-      label: "User Name",
-      placeholder:'Enter your first name',
-      type: "text",
-      validation: { required: "User Name is required" },
+      name: "email",
+      label: "Email",
+      placeholder:'Enter your email',
+      type: "email",
+      validation: { required: "Email is required" },
       colSpan: 12,
     },
     {

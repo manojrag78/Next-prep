@@ -1,9 +1,7 @@
 import { FormConfig } from "@/app/lib/Form/Formtypes/Formtypes";
 
-export type SignupFormValues = {
-  firstName: string;
-  lastName: string;  
-  userName: string;
+export type SignupFormValues = { 
+  username: string;
   password: string;
   email: string;
   confirmPassword?: string; 
@@ -21,21 +19,6 @@ export const signUpFormConfig: FormConfig<SignupFormValues> = {
   gridCols: 12, 
   fields: [
     {
-      name: "firstName",
-      label: "First Name",
-      placeholder:'Enter your First name',
-      type: "text",
-      validation: { required: "First name is required" },
-      colSpan: 6,
-    },
-    {
-      name: "lastName",
-      label: "Last Name",
-      placeholder:'Enter your Last name',
-      type: "text",
-      colSpan: 6,
-    },
-    {
       name: "email",
       label: "Email",
       placeholder:'Enter your email name',
@@ -44,7 +27,7 @@ export const signUpFormConfig: FormConfig<SignupFormValues> = {
       colSpan: 12,
     },
     {
-      name: "userName",
+      name: "username",
       label: "User Name",
       placeholder:'Enter your first name',
       type: "text",
