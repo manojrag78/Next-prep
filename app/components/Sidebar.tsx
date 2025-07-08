@@ -12,6 +12,7 @@ import {
   Cloudy,
   BookCheck,
   CircleUserRound,
+  MessageCircle,
 } from "lucide-react";
 import Image from "next/image";
 const navLinks = [
@@ -22,6 +23,7 @@ const navLinks = [
   { name: "Quiz", path: "/quiz", icon: BookOpenCheck },
   { name: "Data Structures", path: "/data-structures", icon: BookCheck },
   { name: "Developer", path: "/knowthedeveloper", icon: CircleUserRound  },
+  { name : "Chat" , path : "/chat" , icon : MessageCircle }
 ];
 
 export default function Sidebar() {
