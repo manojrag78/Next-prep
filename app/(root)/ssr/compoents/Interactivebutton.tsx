@@ -1,6 +1,8 @@
 'use client'
 
 const Interactivebutton = () => {
+        console.log('📦 Server-side render: /button');
+
     const onClicked = () => {
         window.alert('button clicked')
     }

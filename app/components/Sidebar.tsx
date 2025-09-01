@@ -13,6 +13,7 @@ import {
   BookCheck,
   CircleUserRound,
   MessageCircle,
+  Computer,
 } from "lucide-react";
 import Image from "next/image";
 const navLinks = [
@@ -22,8 +23,9 @@ const navLinks = [
   { name: "Books", path: "/books", icon: BookOpenCheck },
   { name: "Quiz", path: "/quiz", icon: BookOpenCheck },
   { name: "Data Structures", path: "/data-structures", icon: BookCheck },
-  { name: "Developer", path: "/knowthedeveloper", icon: CircleUserRound  },
-  { name : "Chat" , path : "/chat" , icon : MessageCircle }
+  { name: "Developer", path: "/knowthedeveloper", icon: CircleUserRound },
+  { name: "Chat", path: "/chat", icon: MessageCircle },
+  { name: "Machine Coading", path: "/machine-coading", icon: Computer },
 ];
 
 export default function Sidebar() {
@@ -85,11 +87,11 @@ export default function Sidebar() {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-semibold">
                 <Image
-                  src="/manoj_myself.jpeg" 
-                    alt="Avatar"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
+                  src="/manoj_myself.jpeg"
+                  alt="Avatar"
+                  width={32}
+                  height={32}
+                  className="rounded-full"
                 />
               </div>
               <span className="font-medium">Manoj Kumar</span>
